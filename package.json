@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.2",
+    "amfe-flexible": "^2.2.1",
     "typescript": "^2.6.1"
   },
   "description": "An Ionic project",
