@@ -43,6 +43,7 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore demo.keystore t
 zipalign -v 4 android-release-unsigned.apk HelloWorld.apk
 apksigner verify HelloWorld.apk
 ```
+cordova create 项目名
 一、添加android平台
 终端项目目录下输入命令：cordova platform add android(添加)，cordovaplatform remove android(移除)，添加之后，在项目目录的platforms下会生成一个android文件夹。
 二、cordova编译应用
