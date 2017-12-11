@@ -4,6 +4,8 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noStrictGenericChecks": true,
+    "skipLibCheck": true,    
     "lib": [
       "dom",
       "es2015"
