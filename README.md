@@ -9,9 +9,10 @@ angular2.0 + ionic2.0 + rxjs  + sass + ES6/7 + webpack + typescript + tslint
 
 >node的版本要求大于6
 
+>npm install -g cordova ionic
+
 ## Build Setup
 
-```  
 # 安装依赖：
 npm install或cnpm install
 # 如果npm安装依赖报错，改cnpm(淘宝镜像)安装
@@ -19,7 +20,7 @@ npm install或cnpm install
 # 启动项目：
 ionic serve
 
-常见错误
+# 常见错误
 1.Typescript Error
 Class 'Subject<T>' incorrectly extends base class 'Observable<T>'. Types of property 'lift' are incompatible. Type '<R>(operator: Operator<T, R>) => Observable<T>' is not assignable to type '<R>(operator: Operator<T, R>) => Observable<R>'. Type 'Observable<T>' is not assignable to type 'Observable<R>'. Type 'T' is not assignable to type 'R'.
 解决方案：1.更换Typescript版本 cnpm install typescript@2.6.1 --save-dev 确保与"rxjs": "5.5.2",版本对应
@@ -27,13 +28,11 @@ Class 'Subject<T>' incorrectly extends base class 'Observable<T>'. Types of prop
 
 或参考 https://stackoverflow.com/questions/44793859/rxjs-subject-d-ts-error-class-subjectt-incorrectly-extends-base-class-obs
 
-#打包项目
+# 打包项目
 npm run build //测试
 npm run ionic:build --prod//生产
 
-npm install -g cordova ionic
-
-安卓环境中：
+# 安卓环境中：
 ionic cordova platform add android(ios)   //加入到安卓中
 ionic cordova  build android  //打包
 
@@ -66,18 +65,19 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore demo.keystore test.apk moon(应用名)
 zipalign -v 4 android-release-unsigned.apk HelloWorld.apk
 apksigner verify HelloWorld.apk
+
 ```
-一、添加android平台(其他框架与项目)
+# 一、添加android平台(其他框架与项目)
 cordova  create  test  com.cordova.test   test  （创建cordova工程  <文件夹名> <包名> <app名>）@6.0.0
 终端项目目录下输入命令：cordova platform add android(添加)，cordovaplatform remove android(移除)，添加之后，在项目目录的platforms下会生成一个android文件夹。
-二、cordova编译应用
+# 二、cordova编译应用
 执行命令：cordova build --release android，使用build命令编译应用的发布版本，这个过程需要你的android sdk和环境变量、java jdk和环境变量、android的gradle配置没有错误。说一下gradle的配置：到http://www.androiddevtools.cn/，添加环境变量PATH=D:\gradle-3.5\bin，输入命令gradle -v查看是否安装成功。编译成功之后，在项目路径的\platforms\android\build\outputs\apk下会生成一个还未签名的apk文件，我把它重新命名为test.apk，这个时候的apk还不能被安装到手机上。
-三、生成签名文件
+# 三、生成签名文件
 执行命令：keytool -genkey -v -keystore demo.keystore -alias moon -keyalg RSA -keysize 2048 -validity 10000，输入的密码要记住，其他姓名地区等信息随便填吧，最好还是记住，成功之后在主目录下就生成了demo.keystore文件，命令中demo.keystore是生成文件的名字，moon 是别名，随便起但是要记住，一会签名要用到，其他信息如加密、有效日期等就不说了，无需改动。
 四、签名应用文件
 把在第二步生成的test.apk拷贝到与生成的keystore同一目录下，也就是项目的主目录下，执行命令：jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore demo.keystore test.apk moon，输入签名文件的密码，成功之后主目录下的test.apk就被签名成功了，会比原来未被签名的apk文件大一点，能够安装到手机或android虚拟机上了。
 
-ionic打包apk主要分为几个步骤：
+# ionic打包apk主要分为几个步骤：
 第一、 打包
 首先生成 release包
 $ cordova build --release android # 记得加上--release 参数，不然会打出debug包
