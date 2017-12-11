@@ -127,6 +127,8 @@ You will require:
              2.打开android studio编辑器setting中找android sdk/sdk platsform 下载android(api)-23
 ```
 
+
+```
 # 文件结构
  
 ├── config
