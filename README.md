@@ -19,13 +19,35 @@ npm install或cnpm install
 # 启动项目：
 ionic serve
 
+常见错误
+1.Typescript Error
+Class 'Subject<T>' incorrectly extends base class 'Observable<T>'. Types of property 'lift' are incompatible. Type '<R>(operator: Operator<T, R>) => Observable<T>' is not assignable to type '<R>(operator: Operator<T, R>) => Observable<R>'. Type 'Observable<T>' is not assignable to type 'Observable<R>'. Type 'T' is not assignable to type 'R'.
+解决方案：更换Typescript版本 cnpm install typescript@2.6.1 --save-dev 确保与"rxjs": "5.5.2",版本对应
+
+或参考 https://stackoverflow.com/questions/44793859/rxjs-subject-d-ts-error-class-subjectt-incorrectly-extends-base-class-obs
+
 #打包项目
 npm run build //测试
 npm run ionic:build --prod//生产
 
 npm install -g cordova ionic
-cordova platform remove android
-cordova platform add android
+
+安卓环境中：
+ionic cordova platform add android(ios)   //加入到安卓中
+ionic cordova  build android  //打包
+
+ionic run android  //真机
+
+ionic emulate android  //虚拟机
+ 
+ionic cordova platform rm ios(android)
+ionic cordova platform remove android
+ionic cordova platform add android
+ios也一样，将android改成ios
+
+另外
+ionic serve   //在浏览器上运行，自动会打开浏览器
+
 
 #Deploying to a Device
 ionic cordova run android --prod --release
@@ -33,6 +55,7 @@ ionic cordova run android --prod --release
 ionic cordova build android --prod --release
 成功apk路径
 /ionic-angular4/platforms/android/build/outputs/apk/android-debug.apk
+
 #生成签名
 keytool -genkey -v -keystore my-release-key.keystore -alias moon(应用名) -keyalg RSA -keysize 2048 -validity 10000
 建议使用 "keytool -importkeystore -srckeystore my-release-key.keystore -destkeystore my-release-key.keystore -deststoretype pkcs12" 迁移到行业标准格式 PKCS12。
@@ -43,8 +66,8 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore demo.keystore t
 zipalign -v 4 android-release-unsigned.apk HelloWorld.apk
 apksigner verify HelloWorld.apk
 ```
-cordova create 项目名
-一、添加android平台
+一、添加android平台(其他框架与项目)
+cordova  create  test  com.cordova.test   test  （创建cordova工程  <文件夹名> <包名> <app名>）@6.0.0
 终端项目目录下输入命令：cordova platform add android(添加)，cordovaplatform remove android(移除)，添加之后，在项目目录的platforms下会生成一个android文件夹。
 二、cordova编译应用
 执行命令：cordova build --release android，使用build命令编译应用的发布版本，这个过程需要你的android sdk和环境变量、java jdk和环境变量、android的gradle配置没有错误。说一下gradle的配置：到http://www.androiddevtools.cn/，添加环境变量PATH=D:\gradle-3.5\bin，输入命令gradle -v查看是否安装成功。编译成功之后，在项目路径的\platforms\android\build\outputs\apk下会生成一个还未签名的apk文件，我把它重新命名为test.apk，这个时候的apk还不能被安装到手机上。
