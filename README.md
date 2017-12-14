@@ -23,7 +23,7 @@ ionic serve
 # 常见错误
 1.Typescript Error
 Class 'Subject<T>' incorrectly extends base class 'Observable<T>'. Types of property 'lift' are incompatible. Type '<R>(operator: Operator<T, R>) => Observable<T>' is not assignable to type '<R>(operator: Operator<T, R>) => Observable<R>'. Type 'Observable<T>' is not assignable to type 'Observable<R>'. Type 'T' is not assignable to type 'R'.
-解决方案：1.更换Typescript版本 cnpm install typescript@2.6.1 --save-dev 确保与"rxjs": "5.5.2",版本对应
+解决方案：1.更换Typescript版本 cnpm install typescript@2.6.1 --save-dev 确保与typescript全局版本对应和"rxjs":             "5.5.2",版本对应
          2.在tsconfig.json文件的compilerOptions对象中添加属性"noStrictGenericChecks": true,"skipLibCheck": true,    
 
 或参考 https://stackoverflow.com/questions/44793859/rxjs-subject-d-ts-error-class-subjectt-incorrectly-extends-base-class-obs
